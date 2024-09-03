@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.16">
+  <POU Name="MAIN" Id="{9c6917e1-7882-4283-8684-162549e06f53}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	RawNumber		:LREAL := 2.56870000002;
+	DecimalPlaces	:USINT := 3;
+	RoundedNumber1	:LREAL;
+	RoundedNumber2	:LREAL;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Method 1: Uses LINT
+RoundedNumber1 := fnRoundLREAL(
+	NumberToRound := RawNumber,
+	Decimals := DecimalPlaces
+);
+
+// Method 2: Uses LTRUNC but requires Tc2_Math library
+RoundedNumber2 := fnRoundLREAL_TRUNC(
+	NumberToRound := RawNumber,
+	Decimals := DecimalPlaces
+);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
